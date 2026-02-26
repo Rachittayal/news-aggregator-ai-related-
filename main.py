@@ -1,13 +1,20 @@
-from app.runner import run_scrapers
+from app.daily_runner import run_daily_pipeline
 
 
-def main(hours: int=25000) -> dict:
-    results= run_scrapers(hours=hours)
-    
-    print(f"Scraped {len(results['youtube'])} YouTube videos, "
-          f"{len(results['openai'])} OpenAI articles, "
-          f"{len(results['anthropic'])} Anthropic articles")    
-    
-    return results
+def main(hours: int = 100, top_n: int = 10):
+    return run_daily_pipeline(hours=hours, top_n=top_n)
+
+
 if __name__ == "__main__":
-    main(hours=250000)    
+    import sys
+    
+    hours = 100
+    top_n = 10
+    
+    if len(sys.argv) > 1:
+        hours = int(sys.argv[1])
+    if len(sys.argv) > 2:
+        top_n = int(sys.argv[2])
+    
+    result = main(hours=hours, top_n=top_n)
+    exit(0 if result["success"] else 1)
