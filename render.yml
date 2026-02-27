@@ -5,11 +5,11 @@ databases:
     plan: free
 
 services:
-  - type: cron
+  - type: web
     name: daily-digest-job
     env: docker
     dockerfilePath: ./Dockerfile
-    schedule: "0 0 * * *"
+    schedule: ""
     dockerCommand: python main.py
     envVars:
       - key: DATABASE_URL
