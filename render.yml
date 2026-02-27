@@ -6,10 +6,9 @@ databases:
 
 services:
   - type: web
-    name: daily-digest-job
+    name: ai-news-aggregator
     env: docker
     dockerfilePath: ./Dockerfile
-    schedule: ""
     dockerCommand: python main.py
     envVars:
       - key: DATABASE_URL
